@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>AniWiki</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header><h1>Лучшие Аниме</h1></header>
+    <main>
+        {{ range .Animes }}
+        <div class="anime-card">
+            <img src="{{ .Images.JPG.ImageURL }}" alt="{{ .Title }}">
+            <h2>{{ .Title }}</h2>
+        </div>
+        {{ end }}
+    </main>
+</body>
+</html>
