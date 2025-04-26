@@ -13,6 +13,9 @@ func main() {
 	r.LoadHTMLGlob("templates/*")
 
 	r.GET("/", handlers.HomeHandler)
+	r.GET("/anime", handlers.AnimeHandler)
+	r.GET("/anime/:id", handlers.AnimeDetailsHandler)
+	// r.GET("/search", handlers.SearchHandler)
 
 	r.Run(":8080")
 }

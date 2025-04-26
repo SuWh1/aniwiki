@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .title }}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">AniWiki</div>
+        <nav>
+            <ul>
+                <li><a href="#anime-section">Anime</a></li>
+                <li><a href="#manga-section">Manga</a></li>
+                <li><a href="#characters-section">Characters</a></li>
+            </ul>
+        </nav>
+        <div class="search-container">
+            <form action="/search" method="GET">
+                <input type="text" name="q" placeholder="Search anime, manga, characters...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <button id="theme-toggle">Toggle Theme</button>
+    </header>
+    
+    <main>
+        <section id="anime-section">
+            <h2>Anime</h2>
+            <div class="content-grid" id="anime-grid">
+                {{ range .Animes }}
+                <div class="card">
+                    <a href="/anime/{{.MalID}}">
+                        <img src="{{.Images.JPG.ImageURL}}" alt="{{.Title}}">
+                        <div class="card-content">
+                            <h3 class="card-title">{{.Title}}</h3>
+                        </div>
+                    </a>
+                </div>
+                {{ end }}
+            </div>
+            <div class="pagination">
+                <button id="anime-prev" disabled>Previous</button>
+                <span id="anime-page">Page 1</span>
+                <button id="anime-next">Next</button>
+            </div>
+        </section>
+        
+        <!-- Similar sections for manga and characters -->
+    </main>
+    
+    <footer>
+        <p>2025 AniWiki</p>
+    </footer>
+    
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

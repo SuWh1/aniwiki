@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.title}}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">AniWiki</div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="details-page">
+        <div class="details-container">
+            <div class="details-image">
+                <img src="{{.Anime.Images.JPG.LargeImageURL}}" alt="{{.Anime.Title}}">
+            </div>
+            <div class="details-content">
+                <h1>{{.Anime.Title}}</h1>
+                {{if .Anime.TitleEnglish}}
+                    <h2>{{.Anime.TitleEnglish}}</h2>
+                {{end}}
+                {{if .Anime.TitleJapanese}}
+                    <h3>{{.Anime.TitleJapanese}}</h3>
+                {{end}}
+                
+                <div class="details-info">
+                    <p><strong>Type:</strong> {{.Anime.Type}}</p>
+                    <p><strong>Episodes:</strong> {{.Anime.Episodes}}</p>
+                    <p><strong>Status:</strong> {{.Anime.Status}}</p>
+                    <p><strong>Rating:</strong> {{.Anime.Rating}}</p>
+                    <p><strong>Score:</strong> {{.Anime.Score}}</p>
+                    <p><strong>Year:</strong> {{.Anime.Year}}</p>
+                    <p><strong>Genres:</strong> 
+                        {{range $index, $genre := .Anime.Genres}}
+                            {{if $index}}, {{end}}{{$genre.Name}}
+                        {{end}}
+                    </p>
+                </div>
+                
+                <div class="details-synopsis">
+                    <h3>Synopsis</h3>
+                    <p>{{.Anime.Synopsis}}</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>2025 AniWiki</p>
+    </footer>
+</body>
+</html>
