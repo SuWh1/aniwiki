@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .query }}</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">AniWiki</div>
+        <nav>
+            <ul>
+                <li><a href="/anime">Anime</a></li>
+                <li><a href="/manga">Manga</a></li>
+                <li><a href="/characters">Characters</a></li>
+            </ul>
+        </nav>
+        <div class="search-container">
+            <form action="/characters/search" method="GET">
+                <input type="text" name="q" placeholder="Search anime..." value="{{.query}}">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <button id="theme-toggle">Light Theme</button>
+    </header>
+    
+    <main>
+        <section id="anime-section">
+            <h2 id="anime-heading">Search Results</h2>
+            <div class="content-grid" id="anime-grid">  
+                {{ if .Characters }}
+                    {{ range .Characters }}
+                    <div class="card">
+                        <a href="/characters/{{.MalID}}">
+                            <img src="{{.Images.JPG.ImageURL}}" alt="{{.Name}}">
+                            <div class="card-content">
+                                <h3 class="card-title">{{.Name}}</h3>
+                            </div>
+                        </a>
+                    </div>
+                    {{ end }}
+                {{ else }}
+                    {{ if not .error }}
+                    <div class="no-results">
+                        No results found for "{{ .query }}". Try a different search term.
+                    </div>
+                    {{ end }}
+                {{ end }}
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>2025 AniWiki</p>
+    </footer>
+    
+    <script src="/static/js/common.js"></script> 
+    <script src="/static/js/emptyInput.js"></script> 
+</body>
+</html>

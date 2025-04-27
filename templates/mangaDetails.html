@@ -11,7 +11,7 @@
         <div class="logo">AniWiki</div>
         <nav>
             <ul>
-                <li><a href="/anime">Home</a></li>
+                <li><a href="/manga">Home</a></li>
             </ul>
         </nav>
 
@@ -21,34 +21,34 @@
     <main class="details-page">
         <div class="details-container">
             <div class="details-image">
-                <img src="{{.Anime.Images.JPG.LargeImageURL}}" alt="{{.Anime.Title}}">
+                <img src="{{.Manga.Images.JPG.LargeImageURL}}" alt="{{.Manga.Title}}">
             </div>
             <div class="details-content">
-                <h1>{{.Anime.Title}}</h1>
-                {{if .Anime.TitleEnglish}}
-                    <h2>{{.Anime.TitleEnglish}}</h2>
+                <h1>{{.Manga.Title}}</h1>
+                {{if .Manga.TitleEnglish}}
+                    <h2>{{.Manga.TitleEnglish}}</h2>
                 {{end}}
-                {{if .Anime.TitleJapanese}}
-                    <h3>{{.Anime.TitleJapanese}}</h3>
+                {{if .Manga.TitleJapanese}}
+                    <h3>{{.Manga.TitleJapanese}}</h3>
                 {{end}}
                 
                 <div class="details-info">
-                    <p><strong>Type:</strong> {{.Anime.Type}}</p>
-                    <p><strong>Episodes:</strong> {{.Anime.CorrectedEpisodes}}</p>
-                    <p><strong>Status:</strong> {{.Anime.Status}}</p>
-                    <p><strong>Rating:</strong> {{.Anime.Rating}}</p>
-                    <p><strong>Score:</strong> {{.Anime.Score}}</p>
-                    <p><strong>Year:</strong> {{.Anime.CorrectedYear}}</p>
+                    <p><strong>Type:</strong> {{ .Manga.Type }}</p>
+                    <p><strong>Status:</strong> {{ .Manga.Status }}</p>
+                    <p><strong>Chapters:</strong> {{ .Manga.CorrectedChapters }}</p>
+                    <p><strong>Volumes:</strong> {{ .Manga.CorrectedVolumes }}</p>
+                    <p><strong>Score:</strong> {{ .Manga.Score }}</p>
+                    <p><strong>Published:</strong> {{ .Manga.PublishedFrom }} - {{ .Manga.PublishedTo }}</p>
                     <p><strong>Genres:</strong> 
-                        {{range $index, $genre := .Anime.Genres}}
-                            {{if $index}}, {{end}}{{$genre.Name}}
-                        {{end}}
+                        {{ range $index, $genre := .Manga.Genres }}
+                            {{ if $index }}, {{ end }}{{ $genre.Name }}
+                        {{ end }}
                     </p>
                 </div>
                 
                 <div class="details-synopsis">
                     <h3>Synopsis</h3>
-                    <p>{{.Anime.Synopsis}}</p>
+                    <p>{{.Manga.Synopsis}}</p>
                 </div>
             </div>
         </div>

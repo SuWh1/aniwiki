@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .title }}</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">AniWiki</div>
+        <nav>
+            <ul>
+                <li><a href="/anime">Anime</a></li>
+                <li><a href="/manga">Manga</a></li>
+                <li><a href="/characters">Characters</a></li>
+            </ul>
+        </nav>
+        <div class="search-container">
+            <form action="/characters/search" method="GET">
+                <input type="text" name="q" placeholder="Search characters...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <button id="theme-toggle">Light Theme</button>
+    </header>
+    
+    <main>
+        <section id="characters-section">
+            <h2 id="anime-heading">Characters</h2>
+            <div class="content-grid" id="characters-grid">  
+                {{ range .Characters }}
+                <div class="card">
+                    <a href="/characters/{{.MalID}}">
+                        <img src="{{.Images.JPG.ImageURL}}" alt="{{.Name}}">
+                        <div class="card-content">
+                            <h3 class="card-title">{{.Name}}</h3>
+                        </div>
+                    </a>
+                </div>
+                {{ end }}
+            </div>
+            <div class="pagination">
+                <button id="load-more-btn">Load More</button>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>2025 AniWiki</p>
+    </footer>
+    
+    <script src="/static/js/common.js"></script>
+    <script src="/static/js/characters.js"></script>
+    <script src="/static/js/emptyInput.js"></script>
+</body>
+</html>

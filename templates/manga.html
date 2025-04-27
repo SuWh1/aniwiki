@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .title }}</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">AniWiki</div>
+        <nav>
+            <ul>
+                <li><a href="/anime">Anime</a></li>
+                <li><a href="/manga">Manga</a></li>
+                <li><a href="/characters">Characters</a></li>
+            </ul>
+        </nav>
+        <div class="search-container">
+            <form action="/manga/search" method="GET">
+                <input type="text" name="q" placeholder="Search manga...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <button id="theme-toggle">Light Theme</button>
+    </header>
+    
+    <main>
+        <section id="manga-section">
+            <h2 id="anime-heading">Manga</h2>
+            <div class="filter-container">
+                <button class="filter-btn" data-filter="publishing">Publishing</button>
+                <button class="filter-btn" data-filter="upcoming">Upcoming</button>
+                <button class="filter-btn" data-filter="bypopularity">Most Popular</button>
+                <button class="filter-btn" data-filter="favorite">Most Favorite</button>
+            </div>
+            <div class="content-grid" id="manga-grid">  
+                {{ range .Mangas }}
+                <div class="card">
+                    <a href="/manga/{{.MalID}}">
+                        <img src="{{.Images.JPG.ImageURL}}" alt="{{.Title}}">
+                        <div class="card-content">
+                            <h3 class="card-title">{{.Title}}</h3>
+                        </div>
+                    </a>
+                </div>
+                {{ end }}
+            </div>
+            <div class="pagination">
+                <button id="load-more-btn">Load More</button>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>2025 AniWiki</p>
+    </footer>
+    
+    <script src="/static/js/common.js"></script>
+    <script src="/static/js/manga.js"></script>
+    <script src="/static/js/emptyInput.js"></script>
+</body>
+</html>
