@@ -2,6 +2,7 @@ package main
 
 import (
 	"aniwiki/handlers"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -27,5 +28,10 @@ func main() {
 	r.GET("/characters/search", handlers.CharacterSearchPageHandler)
 	r.GET("/api/characters/search", handlers.CharacterSearchAPIHandler)
 
-	r.Run(":8080")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	r.Run(":" + port)
 }
