@@ -13,6 +13,10 @@ func main() {
 	r.Static("/static", "./static")
 	r.LoadHTMLGlob("templates/*")
 
+	r.GET("/", func(c *gin.Context) {
+		c.Redirect(302, "/anime")
+	})
+
 	r.GET("/anime", handlers.HomeHandler)
 	r.GET("/anime/:id", handlers.AnimeDetailsHandler)
 	r.GET("/anime/search", handlers.AnimeSearchPageHandler)
