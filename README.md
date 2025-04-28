@@ -6,7 +6,7 @@
 ## Установка и запуск
 1. Клонируйте репозиторий:
     ```bash
-    git clone https://github.com/yourusername/aniwiki.git
+    git clone https://github.com/SuWh1/aniwiki.git
     ```
 2. Перейдите в папку проекта:
     ```bash
