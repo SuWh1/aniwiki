@@ -105,31 +105,6 @@ func SearchAnime(query string) ([]AnimeDetails, error) {
 	return result.Data, nil
 }
 
-func SearchAnimeWithPagination(query string, page int) ([]AnimeDetails, error) {
-	encodedQuery := url.QueryEscape(query)
-	resp, err := http.Get(fmt.Sprintf("https://api.jikan.moe/v4/anime?q=%s&limit=12&page=%d", encodedQuery, page))
-	if err != nil {
-		return nil, fmt.Errorf("error making request to Jikan API: %v", err)
-	}
-	defer resp.Body.Close()
-
-	var result struct {
-		Data []AnimeDetails `json:"data"`
-	}
-
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	for i := range result.Data {
-		result.Data[i].CorrectedYear = correctDate(result.Data[i].Year)
-		result.Data[i].CorrectedEpisodes = correctEpisodes(result.Data[i].Episodes)
-	}
-
-	return result.Data, nil
-}
-
 func correctDate(year int) string {
 	if year == 0 {
 		return "nd"

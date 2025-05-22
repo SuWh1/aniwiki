@@ -85,23 +85,3 @@ func SearchCharacter(query string) ([]CharacterDetails, error) {
 
 	return result.Data, nil
 }
-
-func SearchCharacterWithPagination(query string, page int) ([]CharacterDetails, error) {
-	encodedQuery := url.QueryEscape(query)
-	resp, err := http.Get(fmt.Sprintf("https://api.jikan.moe/v4/characters?q=%s&limit=12&page=%d", encodedQuery, page))
-	if err != nil {
-		return nil, fmt.Errorf("error making request to Jikan API: %v", err)
-	}
-	defer resp.Body.Close()
-
-	var result struct {
-		Data []CharacterDetails `json:"data"`
-	}
-
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	return result.Data, nil
-}

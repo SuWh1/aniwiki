@@ -126,34 +126,6 @@ func SearchManga(query string) ([]MangaDetails, error) {
 	return result.Data, nil
 }
 
-func SearchMangaWithPagination(query string, page int) ([]MangaDetails, error) {
-	encodedQuery := url.QueryEscape(query)
-	resp, err := http.Get(fmt.Sprintf("https://api.jikan.moe/v4/manga?q=%s&limit=12&page=%d", encodedQuery, page))
-	if err != nil {
-		return nil, fmt.Errorf("error making request to Jikan API: %v", err)
-	}
-	defer resp.Body.Close()
-
-	var result struct {
-		Data []MangaDetails `json:"data"`
-	}
-
-	err = json.NewDecoder(resp.Body).Decode(&result)
-	if err != nil {
-		return nil, err
-	}
-
-	for i := range result.Data {
-		result.Data[i].PublishedFrom = cleanDate(result.Data[i].Published.From)
-		result.Data[i].PublishedTo = cleanDate(result.Data[i].Published.To)
-
-		result.Data[i].CorrectedChapters = correctChapterVolume(result.Data[i].Chapters)
-		result.Data[i].CorrectedVolumes = correctChapterVolume(result.Data[i].Volumes)
-	}
-
-	return result.Data, nil
-}
-
 func cleanDate(datetime string) string {
 	if datetime == "" {
 		return "nd"

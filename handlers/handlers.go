@@ -4,7 +4,6 @@ import (
 	"aniwiki/services"
 	"log"
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -65,31 +64,6 @@ func AnimeSearchPageHandler(c *gin.Context) {
 	})
 }
 
-func AnimeSearchAPIHandler(c *gin.Context) {
-	query := c.DefaultQuery("q", "")
-	pageStr := c.DefaultQuery("page", "1")
-
-	page, err := strconv.Atoi(pageStr)
-	if err != nil || page < 1 {
-		page = 1
-	}
-
-	if query == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Search query is required"})
-		return
-	}
-
-	searchResults, err := services.SearchAnimeWithPagination(query, page)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
-
-	c.JSON(http.StatusOK, gin.H{
-		"animes": searchResults,
-	})
-}
-
 func MangaHandler(c *gin.Context) {
 	mangas, err := services.GetMangaList("publishing")
 	if err != nil {
@@ -146,31 +120,6 @@ func MangaSearchPageHandler(c *gin.Context) {
 	})
 }
 
-func MangaSearchAPIHandler(c *gin.Context) {
-	query := c.DefaultQuery("q", "")
-	pageStr := c.DefaultQuery("page", "1")
-
-	page, err := strconv.Atoi(pageStr)
-	if err != nil || page < 1 {
-		page = 1
-	}
-
-	if query == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Search query is required"})
-		return
-	}
-
-	searchResults, err := services.SearchMangaWithPagination(query, page)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
-
-	c.JSON(http.StatusOK, gin.H{
-		"mangas": searchResults,
-	})
-}
-
 func CharacterHandler(c *gin.Context) {
 	characters, err := services.GetCharacterList()
 	if err != nil {
@@ -224,30 +173,5 @@ func CharacterSearchPageHandler(c *gin.Context) {
 		"title":      "Search - " + query,
 		"query":      query,
 		"Characters": searchResults,
-	})
-}
-
-func CharacterSearchAPIHandler(c *gin.Context) {
-	query := c.DefaultQuery("q", "")
-	pageStr := c.DefaultQuery("page", "1")
-
-	page, err := strconv.Atoi(pageStr)
-	if err != nil || page < 1 {
-		page = 1
-	}
-
-	if query == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Search query is required"})
-		return
-	}
-
-	searchResults, err := services.SearchCharacterWithPagination(query, page)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
-
-	c.JSON(http.StatusOK, gin.H{
-		"characters": searchResults,
 	})
 }
