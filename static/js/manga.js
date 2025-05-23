@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         isLoading = true;
         
         if (page === 1 && !append) {
-            mangaGrid.innerHTML = '<div class="loading">Loading...</div>';
+            mangaGrid.innerHTML = '';
         }
         
         loadMoreBtn.textContent = 'Loading...';
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 mangaGrid.innerHTML = '<div class="error">Failed to load anime data. Please try again later.</div>';
             } else {
                 const errorMsg = document.createElement('div');
-                errorMsg.className = 'error';
+                errorMsg.className = 'error-message';
                 errorMsg.textContent = 'Failed to load more anime data. Please try again.';
                 mangaGrid.appendChild(errorMsg);
             }

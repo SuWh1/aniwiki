@@ -342,16 +342,6 @@
         border-radius: 8px;
         margin: 20px 0;
     }
-    
-    .search-instructions {
-        text-align: center;
-        padding: 40px 20px;
-        font-size: 1.3rem;
-        color: var(--text-color);
-        background-color: var(--card-bg);
-        border-radius: 8px;
-        margin: 20px 0;
-    }
 
     @keyframes shake {
         0%, 100% { transform: translateX(0); }

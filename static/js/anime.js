@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         isLoading = true;
         
         if (page === 1 && !append) {
-            animeGrid.innerHTML = '<div class="loading">Loading...</div>';
+            animeGrid.innerHTML = '';
         }
         
         loadMoreBtn.textContent = 'Loading...';
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
             await delay(500);
             
             const response = await fetch(`https://api.jikan.moe/v4/top/anime?filter=${typeMap[type]}&limit=12&page=${page}`);
-            
+
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 animeGrid.innerHTML = '<div class="error">Failed to load anime data. Please try again later.</div>';
             } else {
                 const errorMsg = document.createElement('div');
-                errorMsg.className = 'error';
+                errorMsg.className = 'error-message';
                 errorMsg.textContent = 'Failed to load more anime data. Please try again.';
                 animeGrid.appendChild(errorMsg);
             }

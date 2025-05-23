@@ -17,6 +17,7 @@ func HomeHandler(c *gin.Context) {
 	}
 
 	c.HTML(http.StatusOK, "anime.html", gin.H{
+		"title":  "AniWiki - Anime",
 		"Animes": animes,
 	})
 }

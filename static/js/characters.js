@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
         isLoading = true;
         
         if (page === 1 && !append) {
-            characterGrid.innerHTML = '<div class="loading">Loading...</div>';
+            characterGrid.innerHTML = '';
         }
         
         loadMoreBtn.textContent = 'Loading...';
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 characterGrid.innerHTML = '<div class="error">Failed to load character data. Please try again later.</div>';
             } else {
                 const errorMsg = document.createElement('div');
-                errorMsg.className = 'error';
+                errorMsg.className = 'error-message';
                 errorMsg.textContent = 'Failed to load more character data. Please try again.';
                 characterGrid.appendChild(errorMsg);
             }
